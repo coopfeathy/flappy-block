@@ -1,0 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,500,600,700');
+body{
+    background-color: rgb(90, 90, 90);
+    color: white;
+    text-align: center;
+    font-family: "Montserrat";
+
+}
+h1{
+    
+    padding-top: 20vh;
+
+}
