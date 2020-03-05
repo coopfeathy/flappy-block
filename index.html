@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Coopers Featherstone</title>
+        <title>Flappy Block</title>
         <meta charset="UTF-8">
         <meta name="description" content="Cooper Featherstones website">
         <meta name="keywords" content="Cooper, Featherstone, website ">
@@ -10,16 +10,12 @@
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="apple-touch-icon" href="other/images/logo.ico">
         <link rel="icon" href="other/images/logo.ico">
-    </head>
-    <body>
-        <h1>This is an html template</h1>
-        <p>Click buttons to change color background</p>
-        <br>
-        <button type="button" onclick="changeBodyBg('yellow');">Yellow</button>
-        <button type="button" onclick="changeBodyBg('lime');">Lime</button>
-        <button type="button" onclick="changeBodyBg('orange');">Orange</button>
-        <button type="button" onclick="changeBodyBg('rgb(90, 90, 90)');">Default</button>
-
+        </head>
+            <body onload="startGame()">    
+            <br>
+            <button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
+            <p>Use the ACCELERATE button to stay in the air</p>
+            <p>How long can you stay alive?</p>
         <script src="script.js"></script>
     </body>
 </html>
