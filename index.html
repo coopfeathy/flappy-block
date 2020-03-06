@@ -3,19 +3,33 @@
     <head>
         <title>Flappy Block</title>
         <meta charset="UTF-8">
-        <meta name="description" content="Cooper Featherstones website">
-        <meta name="keywords" content="Cooper, Featherstone, website ">
+        <meta name="description" content="Cooper Featherstones Flappy Block">
+        <meta name="keywords" content="Cooper, Featherstone, flappy, block ">
         <meta name="author" content="Cooper Featherstone">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="style.css">
         <link rel="apple-touch-icon" href="other/images/logo.ico">
         <link rel="icon" href="other/images/logo.ico">
-        </head>
-            <body onload="startGame()">    
-            <br>
-            <button onmousedown="accelerate(-0.2)" onmouseup="accelerate(0.05)">ACCELERATE</button>
-            <p>Use the ACCELERATE button to stay in the air</p>
-            <p>How long can you stay alive?</p>
+    </head>
+    <body onload="openNav()">    
+
+
+        <div id="introScreen" class="overlay">
+            <div class="overlay-content">
+                <button onclick="startGame(); closeNav();" >Start Game</button>
+                <p>Use the ACCELERATE button to stay in the air</p>
+                <p>How long can you stay alive?</p>
+            </div>
+        </div>
+          
+        
+    
+       
+          
+       
         <script src="script.js"></script>
+
+        <!-- this loses the button focus  -->
+        <script type="text/javascript"> document.addEventListener('click', function(e) { if(document.activeElement.toString() == '[object HTMLButtonElement]'){ document.activeElement.blur(); } }); </script>
     </body>
 </html>
