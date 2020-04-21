@@ -11,22 +11,31 @@
         <link rel="apple-touch-icon" href="other/images/logo.ico">
         <link rel="icon" href="other/images/logo.ico">
     </head>
-    <body onload="openNav()">    
-
+    <body onload="openNav('introScreen')">    
 
         <div id="introScreen" class="overlay">
             <div class="overlay-content">
-                <button onclick="startGame(); closeNav();" >Start Game</button>
+                <button onclick="startGame(); closeNav('introScreen');" >Start Game</button>
                 <p>Use the ACCELERATE button to stay in the air</p>
                 <p>How long can you stay alive?</p>
             </div>
         </div>
-          
-        
-    
+
+        <div id="pauseScreen" class="overlay">
+            <div class="overlay-content">
+                <button onclick="togglePause();">Play</button>
+                <p>the game is paused</p>
+            </div>
+        </div>
+
+        <div id="endGame" class="overlay">
+            <div class="overlay-content">
+                <button onclick="startGame(); closeNav('endGame');">restart</button>
+                <p>you lost</p>
+            </div>
+        </div>
        
-          
-       
+
         <script src="script.js"></script>
 
         <!-- this loses the button focus  -->

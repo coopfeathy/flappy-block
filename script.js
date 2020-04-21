@@ -3,7 +3,25 @@ var myGamePiece;
 var myObstacles = [];
 var myScore;
 
+var paused = true;
+var started = false
+
+
+function openNav(x) {
+    document.getElementById(x).style.display = "block";
+}
+  
+function closeNav(x) {
+    document.getElementById(x).style.display = "none";
+    paused = false;
+    if(x == "introScreen"){
+        started = true;
+    }
+}
+
+
 function startGame() {
+    myGameArea.clear();
     myGamePiece = new component(30, 30, "red", 500, 120);
     myGamePiece.gravity = 0.05;
     myScore = new component("30px", "Consolas", "black", 280, 40, "text");
@@ -13,8 +31,8 @@ function startGame() {
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = window.innerWidth - 10;
-        this.canvas.height = window.innerHeight - 10;
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
@@ -55,8 +73,13 @@ function component(width, height, color, x, y, type) {
     }
     this.hitBottom = function() {
         var rockbottom = myGameArea.canvas.height - this.height;
+        var rockTop = 0;
         if (this.y > rockbottom) {
             this.y = rockbottom;
+            this.gravitySpeed = 0;
+        }
+        if (this.y < rockTop) {
+            this.y = rockTop;
             this.gravitySpeed = 0;
         }
     }
@@ -73,38 +96,44 @@ function component(width, height, color, x, y, type) {
         if ((mybottom < othertop) || (mytop > otherbottom) || (myright < otherleft) || (myleft > otherright)) {
             crash = false;
         }
+        if(crash){
+            openNav("endGame");
+        }
         return crash;
     }
 }
 
 function updateGameArea() {
-    var x, height, gap, minHeight, maxHeight, minGap, maxGap;
-    for (i = 0; i < myObstacles.length; i += 1) {
-        if (myGamePiece.crashWith(myObstacles[i])) {
-            return;
-        } 
+    if(!paused){
+        var x, height, gap, minHeight, maxHeight, minGap, maxGap;
+        for (i = 0; i < myObstacles.length; i += 1) {
+            if (myGamePiece.crashWith(myObstacles[i])) {
+                return;
+            } 
+        }
+        myGameArea.clear();
+        myGameArea.frameNo += 1;
+        if (myGameArea.frameNo == 1 || everyinterval(150)) {
+            x = myGameArea.canvas.width;
+            minHeight = 20;
+            maxHeight = 200;
+            height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
+            minGap = 50;
+            maxGap = 200;
+            gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
+            myObstacles.push(new component(10, height, "green", x, 0));
+            myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
+        }
+        for (i = 0; i < myObstacles.length; i += 1) {
+            myObstacles[i].x += -1;
+            myObstacles[i].update();
+        }
+        myScore.text="SCORE: " + myGameArea.frameNo;
+        myScore.update();
+        myGamePiece.newPos();
+        myGamePiece.update();
     }
-    myGameArea.clear();
-    myGameArea.frameNo += 1;
-    if (myGameArea.frameNo == 1 || everyinterval(150)) {
-        x = myGameArea.canvas.width;
-        minHeight = 20;
-        maxHeight = 200;
-        height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-        minGap = 50;
-        maxGap = 200;
-        gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
-        myObstacles.push(new component(10, height, "green", x, 0));
-        myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
-    }
-    for (i = 0; i < myObstacles.length; i += 1) {
-        myObstacles[i].x += -1;
-        myObstacles[i].update();
-    }
-    myScore.text="SCORE: " + myGameArea.frameNo;
-    myScore.update();
-    myGamePiece.newPos();
-    myGamePiece.update();
+   
 }
 
 function everyinterval(n) {
@@ -118,22 +147,48 @@ function accelerate(n) {
 
 
 
-function openNav() {
-    document.getElementById("introScreen").style.display = "block";
-  }
+function openNav(x) {
+    document.getElementById(x).style.display = "block";
+}
   
-  function closeNav() {
-    document.getElementById("introScreen").style.display = "none";
-  }
+function closeNav(x) {
+    document.getElementById(x).style.display = "none";
+    paused = false;
+    if(x == "introScreen"){
+        started = true;
+    }
+}
 
+function togglePause(){
+    if(!paused){
+        paused = true;
+        openNav("pauseScreen");
+    } else if (paused){
+        paused= false;
+        closeNav("pauseScreen");
+    }
+}
 
 document.onkeypress = (e) => {
-    if(e.code === "Space"){
-        accelerate(-0.2)
+    if(!paused){
+        if(e.key == " "){
+            accelerate(-0.2)
+        }
+        else if(e.key == "p"){
+            togglePause();
+        }
+    } else if(started){
+        if(e.key == "p"){
+            togglePause();
+        }
     }
 }
+
 document.onkeyup = (e) => {
-    if(e.code === "Space"){
-        accelerate(0.05)
+    if(!paused){
+        if(e.key == " "){
+            accelerate(0.1)
+        }
     }
 }
+
