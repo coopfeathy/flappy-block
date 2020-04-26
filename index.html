@@ -13,11 +13,11 @@
     </head>
     <body onload="openNav('introScreen')">    
 
-        <div id="introScreen" class="overlay">
+        <div id="introScreen" class="overlay" onclick="startGame(); closeNav('introScreen');">
             <div class="overlay-content">
-                <button onclick="startGame(); closeNav('introScreen');" >Start Game</button>
-                <p>Use the ACCELERATE button to stay in the air</p>
-                <p>How long can you stay alive?</p>
+                <h1>Press the screen or the space bar to start</h1>
+                <br><br>
+                <h2>Hold the screen or the space bar to accelerate</h2>
             </div>
         </div>
 
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div id="endGame" class="overlay">
+        <div id="endScreen" class="overlay">
             <div class="overlay-content">
                 <button onclick="window.location.reload(); closeNav('endGame');">Try Again?</button>
                 <p>you lost</p>
@@ -39,6 +39,6 @@
         <script src="script.js"></script>
 
         <!-- this loses the button focus  -->
-        <script type="text/javascript"> document.addEventListener('click', function(e) { if(document.activeElement.toString() == '[object HTMLButtonElement]'){ document.activeElement.blur(); } }); </script>
+        <script type="text/javascript">  </script>
     </body>
 </html>

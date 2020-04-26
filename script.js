@@ -2,23 +2,8 @@
 var myGamePiece;
 var myObstacles = [];
 var myScore;
-
 var paused = true;
 var started = false
-
-
-function openNav(x) {
-    document.getElementById(x).style.display = "block";
-}
-  
-function closeNav(x) {
-    document.getElementById(x).style.display = "none";
-    paused = false;
-    if(x == "introScreen"){
-        started = true;
-    }
-}
-
 
 function startGame() {  
     myGamePiece = new component(30, 30, "red", 500, 120);
@@ -96,7 +81,7 @@ function component(width, height, color, x, y, type) {
             crash = false;
         }
         if(crash){
-            openNav("endGame");
+            openNav("endScreen");
         }
         return crash;
     }
@@ -148,6 +133,9 @@ function accelerate(n) {
 
 function openNav(x) {
     document.getElementById(x).style.display = "block";
+    if(x == "endScreen"){
+        started = false;
+    }
 }
   
 function closeNav(x) {
@@ -168,17 +156,40 @@ function togglePause(){
     }
 }
 
+
+function yes(){
+    if(!paused){
+        accelerate(-0.2)
+    }
+}
+function no(){
+    if(!paused){
+        accelerate(0.1)
+    }
+}
+
+document.onmousedown = yes;
+document.onmouseup = no;
+
+
+
 document.onkeypress = (e) => {
     if(!paused){
         if(e.key == " "){
             accelerate(-0.2)
-        }
-        else if(e.key == "p"){
-            togglePause();
-        }
-    } else if(started){
+        };
+    };
+
+    if(started){
         if(e.key == "p"){
             togglePause();
+        }
+    }
+
+    if(!started){
+        if(e.key == " "){
+            startGame(); 
+            closeNav('introScreen');
         }
     }
 }
@@ -191,3 +202,10 @@ document.onkeyup = (e) => {
     }
 }
 
+
+//Make sure that the button isnt active
+document.addEventListener('click', function(e) {
+    if(document.activeElement.toString() == '[object HTMLButtonElement]'){
+        document.activeElement.blur(); 
+    } 
+});
