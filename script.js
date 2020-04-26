@@ -20,8 +20,7 @@ function closeNav(x) {
 }
 
 
-function startGame() {
-    myGameArea.clear();
+function startGame() {  
     myGamePiece = new component(30, 30, "red", 500, 120);
     myGamePiece.gravity = 0.05;
     myScore = new component("30px", "Consolas", "black", 280, 40, "text");
