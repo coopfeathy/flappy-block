@@ -8,14 +8,14 @@ html, body { width:100%; height:100%; background-color: black;}
 
 canvas {
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   background-color:black;
   z-index: 1;
 }
 
 .overlay {
   margin-top: -101vh;
-  height: 101vh;
+  height: 100%;
   width: 100vw;
   display: none;
   position: fixed;
@@ -84,7 +84,7 @@ label{
   top:35px;
 }
 
-@media (max-width: 1000px) {
+/* @media (max-width: 1000px) {
   canvas{
     height: 80vh;
   }
@@ -96,4 +96,4 @@ label{
     margin-top: -83vh;
   }
   html, body { width:100%; height:80vh; background-color: black;}
-}
+} */

@@ -9,6 +9,10 @@ var ended = false;
 var rotated = true;
 
 
+screen.orientation.addEventListener('change', function() {
+	location.reload();
+});
+
 function startGame() {  
     myGamePiece = new component(30, 30, "red", gamePieceX, 120);
     myGamePiece.gravity = 0.05;
