@@ -8,6 +8,18 @@ var started = false;
 var ended = false;
 var rotated = true;
 
+function fullscreen(){
+    var el = document.getElementById('canvas');
+
+       if(el.webkitRequestFullScreen) {
+           el.webkitRequestFullScreen();
+           console.log("first");
+       }
+      else {
+        console.log("secibd");
+         el.mozRequestFullScreen();
+      }            
+    }
 
 // screen.orientation.addEventListener('change', function() {
 // 	location.reload();
@@ -166,6 +178,7 @@ function firstFunction(){
     if(rotated){
         startGame(); 
         closeNav('introScreen');
+        fullscreen();
     }
 }
 
