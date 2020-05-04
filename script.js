@@ -8,18 +8,7 @@ var started = false;
 var ended = false;
 var rotated = true;
 
-function fullscreen(){
-    var el = document.getElementById('canvas');
 
-       if(el.webkitRequestFullScreen) {
-           el.webkitRequestFullScreen();
-           console.log("first");
-       }
-      else {
-        console.log("secibd");
-         el.mozRequestFullScreen();
-      }            
-    }
 
 // screen.orientation.addEventListener('change', function() {
 // 	location.reload();
@@ -35,8 +24,6 @@ function startGame() {
 var myGameArea = {
     canvas : document.getElementById("canvas"),
     start : function() {
-        this.canvas.width = window.innerWidth;
-        this.canvas.height = window.innerHeight;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
@@ -178,7 +165,7 @@ function firstFunction(){
     if(rotated){
         startGame(); 
         closeNav('introScreen');
-        fullscreen();
+        
     }
 }
 
