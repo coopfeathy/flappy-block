@@ -11,34 +11,47 @@
         <link rel="apple-touch-icon" href="other/images/logo.ico">
         <link rel="icon" href="other/images/logo.ico">
     </head>
-    <body onload="openNav('introScreen')">    
+    <body onload="openNav('introScreen'); checkView();"> 
 
-        <div id="introScreen" class="overlay" onclick="startGame(); closeNav('introScreen');">
-            <div class="overlay-content">
-                <h1>Press the screen or the space bar to start</h1>
-                <br><br>
-                <h2>Hold the screen or the space bar to accelerate</h2>
-            </div>
-        </div>
+        <canvas id="canvas"></canvas>
 
         <div id="pauseScreen" class="overlay">
             <div class="overlay-content">
-                <button onclick="togglePause();">Play</button>
-                <p>the game is paused</p>
+                <h1>Paused</h1>
+            </div>
+        </div>
+
+        <div id="wrapper" class="playpause">
+            <input onclick="togglePause()" type="checkbox" value="None" id="playpause" name="check" />
+            <label id="pauseButton" for="playpause"></label>
+        </div>
+       
+        <div id="introScreen" class="overlay" onclick="firstFunction();">
+            <div class="overlay-content">
+                <h1>Press the screen start</h1>
+                <br><br>
+                <h2>Hold the screen or the space bar to accelerate</h2>
+                <br><br>
+                <h2>Press P or the pause button to pause the game</h2>
+            </div>
+        </div>
+
+        <div id="changeView" class="overlay">
+            <div class="overlay-content">
+                <h1>Rotate your screen and reload the page</h1>
+                <br><br>
+                <img src="other/images/rotate.png" alt="Rotate">
             </div>
         </div>
 
         <div id="endScreen" class="overlay">
             <div class="overlay-content">
-                <button onclick="window.location.reload(); closeNav('endGame');">Try Again?</button>
-                <p>you lost</p>
+                <h1>You Lose</h1>
+                <br><br>
+                <h2>Reload the page to try again</h2>
             </div>
         </div>
-       
-
+        
         <script src="script.js"></script>
-
-        <!-- this loses the button focus  -->
-        <script type="text/javascript">  </script>
     </body>
 </html>

@@ -1,19 +1,23 @@
 
 var myGamePiece;
+var gamePieceX = window.innerWidth / 2;
 var myObstacles = [];
 var myScore;
 var paused = true;
-var started = false
+var started = false;
+var ended = false;
+var rotated = true;
+
 
 function startGame() {  
-    myGamePiece = new component(30, 30, "red", 500, 120);
+    myGamePiece = new component(30, 30, "red", gamePieceX, 120);
     myGamePiece.gravity = 0.05;
-    myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+    myScore = new component("30px", "Consolas", "white", 280, 40, "text");
     myGameArea.start();
 }
 
 var myGameArea = {
-    canvas : document.createElement("canvas"),
+    canvas : document.getElementById("canvas"),
     start : function() {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
@@ -134,7 +138,8 @@ function accelerate(n) {
 function openNav(x) {
     document.getElementById(x).style.display = "block";
     if(x == "endScreen"){
-        started = false;
+        document.getElementById("pauseButton").style.borderColor = "black";
+        ended = true;
     }
 }
   
@@ -143,6 +148,20 @@ function closeNav(x) {
     paused = false;
     if(x == "introScreen"){
         started = true;
+    }
+}
+
+function checkView(){
+    if(window.orientation == 0){
+        rotated = false;
+        openNav("changeView");
+    }
+}
+
+function firstFunction(){
+    if(rotated){
+        startGame(); 
+        closeNav('introScreen');
     }
 }
 
@@ -156,7 +175,6 @@ function togglePause(){
     }
 }
 
-
 function yes(){
     if(!paused){
         accelerate(-0.2)
@@ -168,9 +186,11 @@ function no(){
     }
 }
 
+
 document.onmousedown = yes;
 document.onmouseup = no;
-
+document.ontouchstart = yes;
+document.ontouchend = no;
 
 
 document.onkeypress = (e) => {
@@ -180,16 +200,9 @@ document.onkeypress = (e) => {
         };
     };
 
-    if(started){
+    if(started && !ended){
         if(e.key == "p"){
-            togglePause();
-        }
-    }
-
-    if(!started){
-        if(e.key == " "){
-            startGame(); 
-            closeNav('introScreen');
+            document.getElementById("playpause").click();
         }
     }
 }
