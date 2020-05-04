@@ -10,9 +10,9 @@ var rotated = true;
 
 
 
-// screen.orientation.addEventListener('change', function() {
-// 	location.reload();
-// });
+screen.orientation.addEventListener('change', function() {
+	location.reload();
+});
 
 function startGame() {  
     myGamePiece = new component(30, 30, "red", gamePieceX, 120);
@@ -24,6 +24,8 @@ function startGame() {
 var myGameArea = {
     canvas : document.getElementById("canvas"),
     start : function() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
