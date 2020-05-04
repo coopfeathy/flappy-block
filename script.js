@@ -10,9 +10,9 @@ var rotated = true;
 
 
 
-screen.orientation.addEventListener('change', function() {
-	location.reload();
-});
+if (window.DeviceOrientationEvent) {
+    window.addEventListener('orientationchange', function() { location.reload(); }, false);
+}
 
 function startGame() {  
     myGamePiece = new component(30, 30, "red", gamePieceX, 120);
