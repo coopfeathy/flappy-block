@@ -143,7 +143,7 @@ function accelerate(n) {
 function openNav(x) {
     document.getElementById(x).style.display = "block";
     if(x == "endScreen"){
-        document.getElementById("pauseButton").style.borderColor = "black";
+        document.getElementById("pauseButton").style.borderColor = "transparent";
         ended = true;
     }
 }

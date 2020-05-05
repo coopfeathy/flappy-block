@@ -70,13 +70,13 @@ canvas {
   border-width: 18.5px 0 18.5px 30px; 
 } 
 .playpause{
-  border:4px solid #000;
+  border:4px solid transparent;
   border-radius:50%;
   height:75px;
   width:75px;
   text-align:center;
   position:relative;
-  background-color:#000000;
+  background-color:transparent;
 }
 label{
   position:absolute ;
@@ -84,16 +84,18 @@ label{
   top:35px;
 }
 
-/* @media (max-width: 1000px) {
+@media (max-width: 1000px) {
   canvas{
-    height: 80vh;
+    height: 70%;
   }
   .overlay{
-    margin-top: -81vh;
-    height: 81vh;
+    margin-top: -71vh;
+    height: 71vh;
   }
   #wrapper{
-    margin-top: -83vh;
+    margin-top: -73vh;
   }
-  html, body { width:100%; height:80vh; background-color: black;}
-} */
+  body{
+    margin-top: 30vh;
+  }
+}
