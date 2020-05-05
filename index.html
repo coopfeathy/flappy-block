@@ -13,8 +13,6 @@
     </head>
     <body onload="openNav('introScreen'); checkView();"> 
 
-       
-
         <canvas id="canvas"></canvas>
 
         <div id="pauseScreen" class="overlay">
@@ -47,8 +45,13 @@
         <div id="endScreen" class="overlay">
             <div class="overlay-content">
                 <h1>You Lose</h1>
-                <br><br>
-                <h2>Reload the page to try again</h2>
+                <br>
+                <h4 id="score"></h4>
+                <h4 id="highScore"></h4>
+                <br>
+                <div id="flex">
+                    <div id="tryAgain" onclick="location.reload();">Try Again?</div>
+                </div>
             </div>
         </div>
         

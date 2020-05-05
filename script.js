@@ -90,6 +90,7 @@ function component(width, height, color, x, y, type) {
             crash = false;
         }
         if(crash){
+            updateScore();
             openNav("endScreen");
         }
         return crash;
@@ -126,7 +127,7 @@ function updateGameArea() {
         myGamePiece.newPos();
         myGamePiece.update();
     }
-   
+   return myScore;
 }
 
 function everyinterval(n) {
@@ -219,6 +220,23 @@ document.onkeyup = (e) => {
             accelerate(0.1)
         }
     }
+}
+
+function updateScore(){
+    var score = myGameArea.frameNo;
+    var highscore = localStorage.getItem("highscore");
+    if(localStorage.getItem("highscore") !== null){
+        if (score > highscore) {
+            localStorage.setItem("highscore", score);      
+        }
+    }
+    else{
+        localStorage.setItem("highscore", score);
+    }
+
+    document.getElementById("score").innerHTML = "Score: " + score;
+    document.getElementById("highScore").innerHTML = "Highscore: " + localStorage.getItem("highscore");
+
 }
 
 
